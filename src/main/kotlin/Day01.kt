@@ -8,9 +8,8 @@ fun main() {
     fun addElf() = Elf().also(elves::add)
 
     var elve = addElf()
-    val content = ClassLoader.getSystemResourceAsStream("Day01.txt")?.reader() ?: error("Could not find content")
 
-    content.forEachLine { line ->
+    Utils.forEachLineInResource("Day01.txt") { line ->
         when {
             line.isBlank() -> elve = addElf()
             else -> elve.add(line.toInt())
@@ -20,7 +19,7 @@ fun main() {
     elves.sortByDescending { it.sum() }
 
     val top = elves.firstOrNull()
-    val top3 = elves.subList(0,3)
+    val top3 = elves.subList(0, 3)
 
     println(top?.sum())
     println(top3.sumOf { it.sum() })
